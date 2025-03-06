@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
 import mysql.connector
 import bcrypt
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # MySQL Configuration
 db_config = {
@@ -10,7 +12,7 @@ db_config = {
     "user": "root",
     "password": "pvLTyCYCgBbJoQdskITQclfRZZEYGhww",
     "database": "railway",
-    "port": 10996  # Remove quotes to make it an integer
+    "port": 10996
 }
 
 # Connect to MySQL
@@ -44,4 +46,4 @@ def register():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=10000, debug=True)
